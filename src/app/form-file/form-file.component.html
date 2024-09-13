@@ -1,0 +1,45 @@
+<form #form="ngForm">
+    <div class="mb-3">
+        <label for="name" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1"
+            required
+            #name="ngModel" name="name"
+            [(ngModel)]="file.name">
+        @if(name.invalid && name.touched){
+            <span>Debe ingresar el campo nombre</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="name" class="form-label">Fecha</label>
+        <input type="date" class="form-control" id="exampleFormControlInput1"
+            required
+            #creation="ngModel" name="creation"
+            [(ngModel)]="file.name">
+        @if(creation.invalid && creation.touched){
+            <span>Debe ingresar el campo creation</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="name" class="form-label">Tipo Archivo</label>
+        <select class="form-select" id="exampleFormControlInput1"
+            required>
+            <option value="1">Carpeta</option>
+            <option value="2">Archivo</option>
+        
+        </select>
+        @if(creation.invalid && creation.touched){
+            <span>Debe ingresar el campo creation</span>
+        }
+    </div>
+    <div>
+        <label for="parentId" class="form-label">Carpeta</label>
+        <select class="form-select" id="exampleFormControlInput1" selected
+            required>
+        @for(folder of folders; track folder){
+            <option value="{{folder.id}}">{{folder.name}}</option>
+        }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary mb-3 mt-3">Guardar</button>
+</form>
+

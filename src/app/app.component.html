@@ -1,1 +1,76 @@
-add code here!!
+<div class="m-5">
+<div>
+    <app-form-file />
+</div>
+<div class="d-flex justify-content-between">
+    <h1>Archivos</h1>
+    <div>
+        <button class="dropdown-toggle btn btn-primary me-5" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Acciones
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Nuevo</a></li>
+            <li><a class="dropdown-item" href="#">Borrar</a></li>
+        </ul>
+    </div>
+</div>
+
+<hr>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Dueños</th>
+      </tr>
+    </thead>
+    <tbody>
+        @for(file of files;track file;){
+            <tr>
+                <th scope="row"><input type="checkbox" name="file.name" value="file.id"></th>
+                <td>{{file.name.length > 10 ? file.name.slice(0, 10) + '...' : file.name}}</td>
+                <td>{{file.creation | date:'MMM d, yyyy'}} </td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        @if(file.owners.length > 3)
+                        {
+                            <img src="{{file.owners[0].avatarUrl}}" alt="" width="35" class="rounded-circle me-2">
+                            <img src="{{file.owners[1].avatarUrl}}" alt="" width="35" class="rounded-circle me-2">
+                            <img src="{{file.owners[2].avatarUrl}}" alt="" width="35" class="rounded-circle me-2">
+                            <p class="avatar-more3 me-2">
+                                {{file.owners.length - 3}}
+                            </p>
+                        }
+                        @else{
+                            @for(owner of file.owners;track owner;){
+                                <img src="{{owner.avatarUrl}}" alt="" width="35" class="rounded-circle me-2">
+                               }
+
+                        }
+                    </div>
+                </td>
+              </tr>
+        }
+    </tbody>
+  </table>
+</div>
+<style>
+    .avatar-more3 {
+        width: 35px; 
+        height: 35px; 
+        border-radius: 50%; 
+        border: 1px solid black; 
+        background-color: white; 
+        color: black; 
+        font-size: 14px; 
+        font-weight: bold; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        text-align: center;
+        line-height: 35px; 
+        margin-bottom: 0;
+   }
+</style>
